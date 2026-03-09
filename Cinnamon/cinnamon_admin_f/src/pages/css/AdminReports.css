@@ -1,0 +1,121 @@
+.admin-container {
+  background-color: #f8fafc;
+  min-height: 100vh;
+  display: flex;
+}
+
+.admin-main-content {
+  flex: 1;
+  padding: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.admin-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 30px;
+}
+
+.header-left h2 { font-size: 32px; color: #1e293b; margin: 0; }
+.header-left span{
+  color: #b36b00;
+}
+.header-left p { color: #64748b; margin: 5px 0 0; font-size: 14px; }
+
+.report-count-badge {
+  background: #fee2e2;
+  color: #b91c1c;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.content-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  border: 1px solid #f1f5f9;
+}
+
+.modern-admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.modern-admin-table th {
+  background: #f8fafc;
+  padding: 16px 20px;
+  text-align: left;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.modern-admin-table td {
+  padding: 18px 20px;
+  border-bottom: 1px solid #f8fafc;
+  vertical-align: middle;
+}
+
+.ad-thumbnail {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.user-info { display: flex; flex-direction: column; }
+.user-info span { font-weight: 600; color: #334155; }
+.user-info small { color: #94a3b8; }
+
+.reason-bubble {
+  background: #f1f5f9;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  color: #475569;
+  max-width: 300px;
+  line-height: 1.4;
+}
+
+.delete-action-btn {
+  background: #fff1f2;
+  color: #e11d48;
+  border: 1px solid #fecdd3;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.delete-action-btn:hover {
+  background: #e11d48;
+  color: white;
+  box-shadow: 0 4px 12px rgba(225, 29, 72, 0.2);
+}
+
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.status-badge.danger { background: #fee2e2; color: #ef4444; }
+
+.empty-state {
+  padding: 60px;
+  text-align: center;
+  color: #94a3b8;
+  font-style: italic;
+}
+
+.text-right { text-align: right; }

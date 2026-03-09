@@ -1,0 +1,141 @@
+:root {
+  --primary: #4f46e5;
+  --success: #22c55e;
+  --bg-gray: #f9fafb;
+  --text-dark: #1f2937;
+  --text-light: #6b7280;
+}
+
+.requests-container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-family: 'Inter', sans-serif;
+}
+
+.requests-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.requests-header h1 {
+  font-size: 1.5rem;
+  color: var(--text-dark);
+}
+
+.count-badge {
+  background: #e0e7ff;
+  color: var(--primary);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.table-wrapper {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.modern-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.modern-table th {
+  background: var(--bg-gray);
+  padding: 16px 24px;
+  text-align: left;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--text-light);
+  letter-spacing: 0.05em;
+}
+
+.modern-table td {
+  padding: 20px 24px;
+  border-bottom: 1px solid #f3f4f6;
+  vertical-align: middle;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  background: #6366f1;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+.user-name {
+  font-weight: 600;
+  color: var(--text-dark);
+  margin: 0;
+}
+
+.user-email, .user-contact, .user-address {
+  font-size: 0.875rem;
+  color: var(--text-light);
+  margin: 0;
+}
+
+.action-group {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.btn-view, .btn-approve {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+  border: 1px solid transparent;
+}
+
+.btn-view {
+  background: white;
+  border-color: #d1d5db;
+  color: var(--text-dark);
+}
+
+.btn-view:hover {
+  background: #f3f4f6;
+}
+
+.btn-approve {
+  background: var(--success);
+  color: white;
+}
+
+.btn-approve:hover {
+  filter: brightness(0.9);
+}
+
+.btn-approve.loading {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.text-right { text-align: right; }
+
+.empty-state {
+  text-align: center;
+  padding: 60px !important;
+  color: var(--text-light);
+}

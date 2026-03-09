@@ -1,0 +1,119 @@
+.admin-login-container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at top left, #fdfcfb 0%, #e2d1c3 100%);
+  font-family: 'Inter', sans-serif;
+}
+
+.login-card {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 420px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.brand-logo {
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.login-header h2 {
+  font-size: 1.8rem;
+  color: #1a202c;
+  margin-bottom: 8px;
+  font-weight: 800;
+}
+
+.login-header p {
+  color: #718096;
+  font-size: 0.95rem;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #4a5568;
+  margin-bottom: 8px;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 15px;
+  color: #a0aec0;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 12px 15px 12px 45px;
+  border-radius: 12px;
+  border: 2px solid #edf2f7;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: #f8fafc;
+}
+
+.input-wrapper input:focus {
+  border-color: #b36b00;
+  background: white;
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(179, 107, 0, 0.1);
+}
+
+.toggle-password {
+  position: absolute;
+  right: 15px;
+  background: none;
+  border: none;
+  color: #a0aec0;
+  cursor: pointer;
+}
+
+.login-btn {
+  margin-top: 10px;
+  padding: 14px;
+  background: #b36b00;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+  background: #8e5500;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(179, 107, 0, 0.3);
+}
+
+.login-footer {
+  text-align: center;
+  margin-top: 30px;
+  color: #a0aec0;
+  font-size: 0.8rem;
+}
