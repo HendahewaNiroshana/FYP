@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+
+:root {
+  --primary: #b36b00;
+  --primary-light: #ff9900;
+  --dark: #1a1a1a;
+  --bg-light: #fdfcf7;
+}
+
+.home-container {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: var(--bg-light);
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+/* SNAP FIX */
+.snap-section {
+  min-height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px 0;
+}
+
+.footer-section {
+  scroll-snap-align: none;
+}
+
+/* HERO */
+.hero-modern {
+  padding: 0 8%;
+}
+
+.hero-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 50px;
+}
+
+.hero-text h1 {
+  font-size: 3.2rem;
+  font-weight: 800;
+}
+
+.hero-img {
+  width: 100%;
+  border-radius: 20px;
+}
+
+.cta-primary {
+  background: var(--dark);
+  color: white;
+  padding: 15px 30px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+}
+
+/* SECTIONS */
+.section-padding { padding: 80px 8%; }
+
+.section-header h2 {
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+.underline {
+  width: 60px;
+  height: 4px;
+  background: var(--primary);
+  margin: 15px auto;
+}
+
+.content-center {
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* PRODUCTS */
+.product-grid-modern {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.modern-product-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.modern-product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-body { padding: 20px; }
+
+/* ADS */
+.ads-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+  gap: 30px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.modern-ad-card img { width: 100%; height: 200px; object-fit: cover; }
+
+/* SERVICES */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+  gap: 30px;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.service-card {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+}

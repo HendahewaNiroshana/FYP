@@ -1,0 +1,121 @@
+.services-section {
+  padding: 80px 10%;
+  margin-top: 20px;
+  background: #fdfdfd; 
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+}
+
+.services-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.sub-title {
+  color: #ff9900;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.main-title {
+  font-size: 3rem;
+  color: #1a1a1a;
+  margin-top: 10px;
+  font-weight: 800;
+}
+
+.title-underline {
+  width: 80px;
+  height: 4px;
+  background: #ff9900;
+  margin: 20px auto;
+  border-radius: 2px;
+}
+
+.services-grid1 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.service-card-modern {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 40px 30px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeInUp 0.8s ease forwards;
+  border: 1px solid #f0f0f0;
+}
+
+.service-card-modern:hover {
+  transform: translateY(-15px);
+  box-shadow: 0 30px 60px rgba(255, 153, 0, 0.15);
+  border-color: #ffe4bc;
+}
+
+.icon-wrapper {
+  font-size: 2.5rem;
+  color: #ffffff;
+  background: linear-gradient(135deg, #ff9900, #ffcc00);
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 10px 20px rgba(255, 153, 0, 0.3);
+  transition: transform 0.4s ease;
+}
+
+.service-card-modern:hover .icon-wrapper {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+.service-card-modern h2 {
+  font-size: 1.6rem;
+  color: #222;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.service-card-modern p {
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.card-footer-line {
+  width: 40px;
+  height: 3px;
+  background: #ff9900;
+  transition: width 0.4s ease;
+}
+
+.service-card-modern:hover .card-footer-line {
+  width: 100%;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .main-title {
+    font-size: 2.2rem;
+  }
+  .services-section {
+    padding: 60px 5%;
+  }
+}

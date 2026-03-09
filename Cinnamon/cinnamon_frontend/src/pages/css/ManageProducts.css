@@ -1,0 +1,208 @@
+.manage-page-container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 60px 8%;
+  margin-top: 30px;
+  background-color: #fcfcfc;
+}
+
+.modern-form-container {
+  background: #ffffff;
+  padding: 35px;
+  border-radius: 24px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f0f0f0;
+  margin-bottom: 50px;
+}
+
+.form-subtitle {
+  font-size: 1.4rem;
+  color: #444;
+  margin-bottom: 25px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.input-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.modern-manage-form .input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.modern-manage-form label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.modern-manage-form input,
+.modern-manage-form textarea {
+  padding: 14px;
+  border-radius: 12px;
+  border: 2px solid #eee;
+  font-size: 0.95rem;
+  transition: all 0.3s;
+  outline: none;
+}
+
+.modern-manage-form input:focus,
+.modern-manage-form textarea:focus {
+  border-color: #ffcc00;
+  box-shadow: 0 0 0 4px rgba(255, 204, 0, 0.1);
+}
+
+.file-input-field {
+  padding: 10px !important;
+  background: #f9f9f9;
+}
+
+.form-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.submit-manage-btn {
+  flex: 2;
+  padding: 16px;
+  background: #ffcc00;
+  color: #000;
+  border: none;
+  border-radius: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.cancel-manage-btn {
+  flex: 1;
+  padding: 16px;
+  background: #eee;
+  color: #555;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.submit-manage-btn:hover { background: #1a1a1a; color: #fff; }
+
+.table-wrapper {
+  background: white;
+  border-radius: 20px;
+  padding: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+  overflow-x: auto;
+}
+
+.modern-products-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.modern-products-table th {
+  padding: 18px;
+  background: #fcfcfc;
+  color: #888;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  border-bottom: 1px solid #eee;
+}
+
+.modern-products-table td {
+  padding: 20px;
+  border-bottom: 1px solid #f9f9f9;
+  vertical-align: middle;
+}
+
+.table-thumb {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid #eee;
+}
+
+.td-info { display: flex; flex-direction: column; }
+.td-name { font-weight: 700; color: #333; font-size: 1rem; }
+.td-desc { font-size: 0.8rem; color: #999; margin-top: 4px; }
+.td-price { font-weight: 800; color: #222; }
+
+.stock-tag {
+  padding: 4px 10px;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+.stock-tag.in { background: #e8f5e9; color: #2e7d32; }
+.stock-tag.out { background: #ffebee; color: #c62828; }
+
+.table-actions { display: flex; gap: 8px; }
+.table-edit-btn, .table-delete-btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.table-edit-btn { background: #f0f0f0; color: #333; }
+.table-delete-btn { background: #fff; color: #e74c3c; border: 1px solid #ffebee; }
+
+.table-edit-btn:hover { background: #1a1a1a; color: #ffcc00; }
+.table-delete-btn:hover { background: #e74c3c; color: #fff; }
+
+.fade-in { animation: fadeIn 0.8s ease-out; }
+
+.file-input-field {
+  width: 100%;
+  padding: 12px !important;
+  background: #fdfdfd;
+  border: 2px dashed #e0e0e0; 
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #777;
+  font-size: 0.9rem;
+}
+
+.file-input-field:hover {
+  border-color: #ffcc00;
+  background: #fffef5;
+  color: #333;
+}
+
+.file-input-field::-webkit-file-upload-button {
+  background: #1a1a1a;
+  color: #ffcc00;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  margin-right: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.file-input-field::-webkit-file-upload-button:hover {
+  background: #333;
+}
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 768px) {
+  .input-row { grid-template-columns: 1fr; }
+  .manage-page-container { padding: 40px 5%; }
+}

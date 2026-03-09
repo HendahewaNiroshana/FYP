@@ -1,0 +1,79 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.ai-container {
+  padding: 50px;
+  background: #f0f4f8;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+}
+
+.ai-title {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 40px;
+  font-weight: 700;
+}
+
+.ai-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.ai-card {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  border-bottom: 5px solid transparent;
+}
+
+.ai-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.best-prod-card { border-color: #f1c40f; }
+.revenue-card { border-color: #3498db; }
+
+.icon { font-size: 50px; margin-bottom: 20px; }
+.value { font-size: 28px; font-weight: bold; color: #333; margin: 15px 0; }
+
+.ai-info-box {
+  max-width: 800px;
+  margin: 50px auto;
+  background: #d1ecf1;
+  padding: 20px;
+  border-left: 5px solid #0c5460;
+  border-radius: 10px;
+  color: #0c5460;
+}
+
+/* 🌀 Pulse Loading Animation */
+.ai-loader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.pulse-ring {
+  width: 60px;
+  height: 60px;
+  border: 5px solid #3498db;
+  border-radius: 50%;
+  animation: pulse 1.5s infinite ease-out;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.5); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
