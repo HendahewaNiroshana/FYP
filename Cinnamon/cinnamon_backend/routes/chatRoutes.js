@@ -5,205 +5,35 @@ const router = express.Router();
 
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
 
-const BASE_CONTEXT = `Cinnamon is a popular spice obtained from the inner bark of trees belonging to the Cinnamomum genus. 
-It is commonly used in cooking, baking, beverages, and traditional remedies due to its aromatic flavor and medicinal properties.
-
-Health Benefits:
-- Cinnamon has antioxidant properties that help combat oxidative stress in the body.
-- It may help regulate blood sugar levels by improving insulin sensitivity, making it useful for individuals with type 2 diabetes.
-- Anti-inflammatory compounds in cinnamon can help reduce inflammation in tissues and support overall health.
-- Some studies suggest cinnamon may support heart health by lowering LDL cholesterol and triglyceride levels.
-- Cinnamon has antimicrobial properties and may help fight certain bacteria and fungi.
-
-Usage and Forms:
-- Cinnamon is available in sticks, ground powder, and essential oil form.
-- It can be added to foods like desserts, cereals, teas, smoothies, and savory dishes.
-- Cassia cinnamon and Ceylon cinnamon are two common types; Ceylon is considered "true cinnamon" and has lower coumarin content.
-
-Precautions:
-- Excessive consumption of cinnamon, especially Cassia, may lead to liver toxicity due to high coumarin content.
-- People with allergies to cinnamon may experience skin irritation or gastrointestinal upset.
-- Pregnant or breastfeeding women should consult a healthcare provider before consuming large amounts of cinnamon.
-- Cinnamon supplements should be taken with caution and under professional guidance.
-
-Side Effects:
-- High doses may cause mouth sores, irritation, or allergic reactions.
-- Overuse can interact with blood-thinning medications or affect blood sugar levels.
-
-Cultural and Historical Context:
-- Cinnamon has been used for thousands of years in traditional medicine, including Ayurveda and Traditional Chinese Medicine.
-- It has a rich history in culinary traditions worldwide, often associated with warmth, flavor, and festive dishes.
-
-Cinnamon Grades:
-- H1,H2,C1,C2.
-- Alfba.
-
-
-
-Cinnamon — The Golden Spice of Wellness
-
-Cinnamon is a world-renowned spice obtained from the inner bark of evergreen trees of the Cinnamomum genus, native mainly to Sri Lanka, India, and parts of Southeast Asia. Known for its captivating aroma, sweet-spicy flavor, and numerous therapeutic benefits, cinnamon has played a vital role in culinary traditions, traditional medicine, and trade history for thousands of years.
-
-
-
-Botanical Overview
-
-Scientific Name:Cinnamomum verum (Ceylon Cinnamon), Cinnamomum cassia (Cassia Cinnamon)
-Family:Lauraceae
-Parts Used:Inner bark, essential oil extracted from leaves and bark
-Main Producing Regions:Sri Lanka (Ceylon cinnamon), Indonesia, China, and Vietnam (Cassia varieties)
-
-Ceylon cinnamon, often referred to as “true cinnamon,” is prized for its delicate flavor and lower coumarin content, whereas Cassia cinnamon tends to have a stronger, more pungent aroma.
-
----
-
-Chemical Composition
-
-Cinnamon owes its properties to several bioactive compounds:
-
-Cinnamaldehyde - responsible for the characteristic aroma and many of the spice's antimicrobial and anti-inflammatory effects.
-Eugenol - contributes to the pleasant fragrance and pain-relieving qualities.
-Coumarin - found in higher concentrations in Cassia cinnamon; excessive intake can cause liver toxicity.
-Polyphenols - natural antioxidants that help reduce oxidative stress.
-
----
-
-Health Benefits
-
-1. Antioxidant Properties:
-   Cinnamon is rich in polyphenolic antioxidants, which neutralize free radicals and protect cells from oxidative damage.
-2. Blood Sugar Regulation:
-   It enhances insulin sensitivity, helping maintain stable glucose levels, which may be beneficial for people with type 2 diabetes.
-3. Anti-Inflammatory Effects:
-   Active compounds in cinnamon help reduce inflammation and swelling in tissues, contributing to overall wellness.
-4. Heart Health:
-   Regular, moderate consumption of cinnamon may help lower LDL (“bad”) cholesterol, triglycerides, and blood pressure.
-5. Antimicrobial Action:
-   Cinnamon’s essential oils can inhibit the growth of harmful bacteria, fungi, and even some viruses.
-6. Neuroprotective Effects:
-   Emerging research suggests cinnamon may play a role in protecting neurons and improving cognitive function, potentially supporting memory and learning.
-7. Digestive Aid:
-   Traditionally, cinnamon is used to relieve bloating, nausea, and indigestion.
-8. Weight Management Support:
-   Cinnamon may help improve metabolism and reduce hunger cravings when used with a balanced diet.
-
----
-
-Culinary Uses
-
-Cinnamon is one of the most versatile spices, used across sweet and savory cuisines:
-
-Common in desserts (cakes, pastries, puddings), breakfast cereals, and beverages (coffee, tea, hot chocolate).
-Added to savory dishes such as curries, biryanis, and marinades in Asian and Middle Eastern cuisines.
-Infused in syrups, smoothies, and herbal teas for a natural, warming flavor.
-
-Forms Available:
-
-Cinnamon sticks (quills)
-Ground cinnamon powder
-Cinnamon extract or oil
-Capsules and supplements (for medicinal use)
-
----
-
-Precautions and Safety
-
-Coumarin Content:
-  Cassia cinnamon contains high levels of coumarin, which may cause liver toxicity if consumed in large amounts.
-Allergies:
-  Some individuals may experience skin irritation, burning sensations, or mouth sores due to sensitivity.
-Pregnancy and Breastfeeding:
-  High doses of cinnamon are not recommended without medical supervision.
-Drug Interactions:
-  Cinnamon may interact with blood thinners (like warfarin), diabetes medications, and liver-affecting drugs.
-
-Recommended Intake:
-Generally, 1-2 grams of Ceylon cinnamon daily is considered safe for most adults.
-
----
-
-Side Effects
-
-Mouth or gum irritation from excessive use.
-Allergic skin reactions (rare).
-Low blood sugar symptoms if taken with anti-diabetic medication.
-Liver stress due to coumarin in Cassia cinnamon.
-
----
-
-Cultural and Historical Significance
-
-In ancient Egypt, cinnamon was more valuable than gold and used in embalming and perfumery.
-Ayurvedic medicine and Traditional Chinese Medicine (TCM) describe cinnamon (Dalchini in Ayurveda) as a warming herb that improves circulation, boosts metabolism, and balances bodily energy.
-In medieval Europe, it symbolized luxury and was traded as a high-value commodity.
-Today, cinnamon remains a cultural symbol of warmth and comfort, commonly associated with festive foods and beverages.
-
----
-
-Industrial and Modern Applications
-
-Used in pharmaceuticals for its antiseptic and preservative properties.
-Incorporated in cosmetics, perfumes, and aromatherapy for its soothing scent.
-Cinnamon oil is a natural pesticide and is used in food preservation.
-Research continues into its use in managing obesity, Alzheimer’s disease, and metabolic syndrome.
-
----
-
-Cinnamon Grades and Quality
-
-Cinnamon is graded based on bark thickness, aroma, and texture:
-
-H1, H2, C1, C2 – Standard grading for Ceylon cinnamon, with H1 being the highest quality (thin, smooth, and aromatic).
-Alba Grade: Premium grade, ultra-thin quills with the most delicate flavor.
-Quillings and Chips:Lower grades used for powder production and extraction.
-
-Proper grading ensures consistency in flavor, quality, and export standards, especially in Sri Lankan cinnamon (Ceylon).
-
----
-
-Sustainability and Trade
-
-Cinnamon cultivation supports thousands of farmers in Sri Lanka and Southeast Asia. Sustainable harvesting practices—such as careful peeling and drying of the inner bark—ensure the longevity of cinnamon trees and biodiversity conservation. Fair-trade initiatives aim to improve the livelihoods of local growers while maintaining product quality for global export.
-
----
-
-Summary
-
-Cinnamon is more than a kitchen spice—it is a medicinal, cultural, and economic treasure. From its antioxidant-rich composition to its role in ancient civilizations, cinnamon continues to captivate modern science and culinary art alike. However, responsible consumption is essential to harness its benefits safely.
-
-
-`;
-
 router.post('/ask', async (req, res) => {
   try {
     const { question } = req.body;
 
     if (!question?.trim()) {
-      return res.status(400).json({ error: 'Question is required' });
+      return res.status(400).json({ error: 'Please enter a question.' });
     }
 
-    const prompt = `
-Answer the question ONLY using the context below.
-
-Context:
-${BASE_CONTEXT}
-
-Question:
-${question}
-
-Answer:
-`;
+    const systemMessage = `
+      You are the "Cinnamon Bridge AI Expert". Your knowledge is STRICTLY limited to Cinnamon and the Cinnamon Bridge project.
+      
+      STRICT RULES:
+      1. If the user asks about cinnamon (types, grades like Alba/C5/H1, benefits, history, or cooking), provide a detailed and expert answer.
+      2. If the user asks about ANYTHING ELSE (e.g., other countries, general politics, sports, other foods, or general knowledge), you MUST politely refuse.
+      3. Do NOT provide lists, suggestions, or "brief helpful answers" for non-cinnamon topics.
+      4. Your response for non-cinnamon topics should be exactly like this: "I am sorry, but I am a specialized Cinnamon Assistant. I can only provide information related to Cinnamon and its industry. Please ask me anything about Cinnamon!"
+      5. You can answer in English or Sinhala based on the user's language.
+    `;
 
     const groqRes = await axios.post(
       'https://api.groq.com/openai/v1/chat/completions',
       {
-        model: 'llama-3.1-8b-instant',
+        model: 'llama-3.1-8b-instant', 
         messages: [
-          { role: 'system', content: 'You are a helpful assistant.' },
-          { role: 'user', content: prompt }
+          { role: 'system', content: systemMessage },
+          { role: 'user', content: question } 
         ],
-        temperature: 0.3,
-        max_tokens: 200
+        temperature: 0.6, 
+        max_tokens: 500  
       },
       {
         headers: {
@@ -214,16 +44,14 @@ Answer:
       }
     );
 
-    const answer =
-      groqRes.data.choices?.[0]?.message?.content ||
-      'No answer found';
+    const answer = groqRes.data.choices?.[0]?.message?.content || 'Answer not found.';
 
     res.json({ answer });
 
   } catch (err) {
     console.error('Groq error:', err.response?.data || err.message);
     res.status(500).json({
-      answer: '❗ Cloud AI is not responding. Try again.'
+      answer: '❗ The Cloud AI system is not responding at this time. Please try again.'
     });
   }
 });

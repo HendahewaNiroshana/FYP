@@ -1,173 +1,127 @@
-import { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { motion, useAnimation } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { motion, useScroll, useTransform } from "framer-motion";
+import axios from "axios";
 import Footer from "../components/Footer";
 import "./css/Home.css";
 
-const ScrollSection = ({ children }) => {
-  const controls = useAnimation();
-  const [ref, inView] = useInView({ threshold: 0.2 });
-
-  useEffect(() => {
-    if (inView) controls.start("visible");
-    else controls.start("hidden");
-  }, [controls, inView]);
-
-  return (
-    <motion.div
-      ref={ref}
-      initial="hidden"
-      animate={controls}
-      variants={{
-        hidden: { opacity: 0, y: 60 },
-        visible: {
-          opacity: 1,
-          y: 0,
-          transition: { duration: 0.8, ease: "easeOut" }
-        }
-      }}
-      className="snap-section"
-    >
-      {children}
-    </motion.div>
-  );
-};
-
 export default function Home() {
   const [products, setProducts] = useState([]);
-  const [ads, setAds] = useState([]);
   const navigate = useNavigate();
+  
+  // Horizontal Scroll Reference
+  const targetRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+  });
 
-  const scrollToProducts = () => {
-    document.getElementById("products")?.scrollIntoView({ behavior: "smooth" });
-  };
+  // තිරස් අතට scroll වන වේගය සහ දුර පාලනය
+  const x = useTransform(scrollYProgress, [0.3, 0.6], ["0%", "-60%"]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/products")
-      .then(res => res.json())
-      .then(data => data.success && setProducts(data.products.filter(p => p.stock > 0)));
-
-    fetch("http://localhost:5000/api/ads")
-      .then(res => res.json())
-      .then(data => setAds(data));
+    axios.get("http://localhost:5000/api/products")
+      .then(res => {
+        if(res.data.success) setProducts(res.data.products.filter(p => p.stock > 0));
+      })
+      .catch(err => console.log(err));
   }, []);
 
   return (
-    <div className="home-container">
-
-      {/* HERO */}
-      <section className="hero-modern snap-section">
-        <div className="hero-content">
-
-          <motion.div
-            className="hero-text"
+    <div className="snap-container">
+      
+      {/* 1. HERO SECTION */}
+      <section className="snap-section hero-light">
+        <div className="hero-split">
+          <motion.div 
+            className="hero-left"
             initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
+            whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
           >
-            <span className="hero-badge">Premium Sri Lankan Spices</span>
-            <h1>Crafting the Future of <span>Cinnamon</span> Business</h1>
-            <p>Empowering growers and buyers with AI-driven insights and a seamless marketplace.</p>
-
-            <div className="hero-btns">
-              <button className="cta-primary" onClick={scrollToProducts}>Explore Products</button>
-              <button className="cta-secondary" onClick={() => navigate('/about')}>Our Story</button>
+            <span className="badge-light">Premium Quality</span>
+            <h1>Pure Sri Lankan <span>Cinnamon</span> Excellence</h1>
+            <p>Experience the world's finest spices, sourced directly from local growers with AI-driven quality assurance.</p>
+            <button className="btn-primary-light" onClick={() => document.getElementById('products').scrollIntoView({behavior:'smooth'})}>
+              Shop Collection
+            </button>
+          </motion.div>
+          <motion.div 
+            className="hero-right"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1 }}
+          >
+            <div className="hero-circle-bg">
+              <img src="https://media.post.rvohealth.io/wp-content/uploads/2020/09/health-benefits-cinnamon-fb-1200x628.jpg" alt="Cinnamon" />
             </div>
           </motion.div>
-
-          <motion.img
-            className="hero-img"
-            src="https://media.post.rvohealth.io/wp-content/uploads/2020/09/health-benefits-cinnamon-fb-1200x628.jpg"
-            alt="Cinnamon"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1 }}
-          />
         </div>
       </section>
 
-      {/* PRODUCTS */}
-      <ScrollSection>
-        <section id="products" className="section-padding content-center">
-          <div className="section-header">
-            <h2>Featured Collection</h2>
-            <div className="underline"></div>
-          </div>
-
-          <div className="product-grid-modern">
-            {products.slice(0, 4).map(product => (
-              <div className="modern-product-card" key={product._id}>
-                <img src={`http://localhost:5000${product.image}`} alt={product.name} />
-                <div className="card-body">
-                  <h3>{product.name}</h3>
-                  <p className="price">Rs. {product.price.toLocaleString()}</p>
-                  <button onClick={() => navigate(`/productsdetails/${product._id}`)}>
-                    View Details
-                  </button>
+      {/* 2. HORIZONTAL PRODUCTS SECTION (Integrated into Snap) */}
+      <section id="products" className="snap-section horizontal-outer">
+        <div className="horizontal-header-light">
+          <h2>Our Featured <span>Products</span></h2>
+          <p>Scroll down to see them slide</p>
+        </div>
+        <div ref={targetRef} className="horizontal-trigger">
+          <div className="sticky-box">
+            <motion.div style={{ x }} className="horizontal-items">
+              {products.map((product) => (
+                <div className="product-card-light" key={product._id}>
+                  <div className="img-holder">
+                    <img src={`http://localhost:5000${product.image}`} alt={product.name} />
+                  </div>
+                  <div className="info">
+                    <h4>{product.name}</h4>
+                    <p>Rs. {product.price.toLocaleString()}</p>
+                    <button onClick={() => navigate(`/productsdetails/${product._id}`)}>View Product</button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </motion.div>
           </div>
-        </section>
-      </ScrollSection>
+        </div>
+      </section>
 
-      {/* ADS */}
-      <ScrollSection>
-        <section className="section-padding content-center">
-          <div className="section-header">
-            <h2>Market Insights & Ads</h2>
-            <div className="underline"></div>
-          </div>
+      {/* 3. OUR MISSION */}
+      <section className="snap-section mission-light">
+        <div className="content-box">
+          <motion.div 
+            className="text-area"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+          >
+            <span className="number">01</span>
+            <h2>Our Mission</h2>
+            <p>To empower local cinnamon farmers by providing a direct-to-market platform, ensuring fair pricing and sustainable farming practices through modern technology.</p>
+            <div className="line-gold"></div>
+          </motion.div>
+          <div className="image-area mission-bg"></div>
+        </div>
+      </section>
 
-          <div className="ads-container">
-            {ads.map(ad => (
-              <div className="modern-ad-card" key={ad._id}>
-                <img src={`http://localhost:5000${ad.imageUrl}`} alt={ad.title} />
-                <div className="ad-content">
-                  <h3>{ad.title}</h3>
-                  <p>{ad.description.substring(0, 80)}...</p>
-                  <Link to={`/advertisement/${ad._id}`}>Read More →</Link>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-      </ScrollSection>
+      {/* 4. OUR VISION */}
+      <section className="snap-section vision-light">
+        <div className="content-box reverse">
+          <motion.div 
+            className="text-area"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+          >
+            <span className="number">02</span>
+            <h2>Our Vision</h2>
+            <p>To redefine the global spice trade by making Sri Lankan cinnamon the gold standard of quality, supported by AI-powered sales insights and ethical sourcing.</p>
+            <div className="line-gold"></div>
+          </motion.div>
+          <div className="image-area vision-bg"></div>
+        </div>
+      </section>
 
-      {/* SERVICES */}
-      <ScrollSection>
-        <section className="section-padding content-center">
-          <div className="section-header">
-            <h2>Why Choose Us?</h2>
-          </div>
-
-          <div className="services-grid">
-            <div className="service-card">
-              <div className="icon">🚀</div>
-              <h3>Innovation</h3>
-              <p>AI-powered sales predictions.</p>
-            </div>
-
-            <div className="service-card">
-              <div className="icon">✨</div>
-              <h3>Quality</h3>
-              <p>Hand-picked premium cinnamon.</p>
-            </div>
-
-            <div className="service-card">
-              <div className="icon">🌍</div>
-              <h3>Global</h3>
-              <p>Connecting Sri Lanka to the world.</p>
-            </div>
-          </div>
-        </section>
-      </ScrollSection>
-
-      {/* FOOTER (NO SNAP) */}
-      <div className="footer-section">
+      {/* 5. FOOTER */}
+      <section className="snap-section footer-snap">
         <Footer />
-      </div>
+      </section>
 
     </div>
   );

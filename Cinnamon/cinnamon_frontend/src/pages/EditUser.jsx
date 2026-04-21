@@ -1,9 +1,39 @@
 import React, { useState, useContext } from "react";
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from "../context/AuthContext";
 import "./css/EditUser.css";
 
 export default function EditUser() {
   const { user, login } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleChangePasswordClick = () => {
+  const userDataString = localStorage.getItem('user'); 
+
+  if (userDataString) {
+    try {
+      const userData = JSON.parse(userDataString);
+
+      const userEmail = userData.email;
+
+      if (userEmail) {
+        localStorage.setItem('resetEmail', userEmail);
+        
+        navigate('/reset-password');
+      } else {
+        alert("E-mail Not Found.");
+      }
+
+    } catch (error) {
+      console.error("Error parsing user data:", error);
+      alert("Error. Please Login again.");
+      navigate('/login');
+    }
+  } else {
+    alert("User data not found. Please Login again.");
+    navigate('/login');
+  }
+};
 
   const [form, setForm] = useState({
     accountType: user?.accountType || "user",
@@ -144,6 +174,17 @@ export default function EditUser() {
                   <input type="text" name="address" value={form.address} onChange={handleChange} required />
                 </div>
               </div>
+
+              <div className="settings-section">
+              <p>Security Settings</p>
+              <button 
+                  onClick={handleChangePasswordClick} 
+                  style={{ color: 'red', cursor: 'pointer', background: 'none', border: 'none', textDecoration: 'none' }}
+              >
+                Change Password?
+              </button>
+              </div>
+
               <button type="submit" className="btn-gold-save">Save Profile Changes</button>
             </form>
 

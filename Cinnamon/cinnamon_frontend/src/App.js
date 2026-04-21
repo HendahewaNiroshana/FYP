@@ -25,6 +25,8 @@ import SallerOrder from "./pages/OrderManagement";
 import AddReport from "./pages/AddReport";
 import MyOrders from "./pages/MyOrders";
 import SalesReport from "./pages/SalesReport";
+import CinnamonClassifier from "./components/CinnamonClassifier";
+import PasswordReset from "./pages/PasswordReset";
 
 export default function App() {
   return (
@@ -56,6 +58,8 @@ export default function App() {
           <Route path="/addreport" element={<AddReport />} />
           <Route path="/myorders" element={<MyOrders />} />
           <Route path="/salereport" element={<SalesReport />} />
+          <Route path="/cinnamonclassifier" element={<CinnamonClassifier />} />
+          <Route path="/reset-password" element={<PasswordReset />} />
 
         </Routes>
       </div>

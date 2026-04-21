@@ -103,6 +103,14 @@ class _ToolsScreenState extends State<ToolsScreen> {
                 ),
                 _buildModernToolCard(
                   context,
+                  icon: Icons.search_rounded,
+                  title: "Cinnamon Grades Classifier",
+                  desc: "Identify Your Cinnamon Grade",
+                  route: '/cinnamon-grades',
+                  iconColor: const Color.fromARGB(255, 235, 170, 31), // Blue
+                ),
+                _buildModernToolCard(
+                  context,
                   icon: Icons.add_circle_rounded,
                   title: "Add Products",
                   desc: "List New Item",

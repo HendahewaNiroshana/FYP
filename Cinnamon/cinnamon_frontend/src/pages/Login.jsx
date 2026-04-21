@@ -30,6 +30,33 @@ export default function Login() {
     }
   };
 
+  const handleForgotPassword = (e) => {
+  if (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+
+  if (!email) {
+    alert("Please enter your Email Address first.");
+    return;
+  }
+
+  try {
+    localStorage.removeItem('resetEmail');
+    localStorage.removeItem('resetStep');
+    localStorage.removeItem('tempOTP');
+
+    localStorage.setItem('resetEmail', email.trim()); 
+    localStorage.setItem('resetStep', '1');
+
+    console.log("Success: Cleaned old data and saved new email.");
+
+    navigate("/reset-password");
+  } catch (err) {
+    console.error("LocalStorage Error:", err);
+  }
+};
+
   return (
     <div className="auth-page-wrapper">
       <div className="auth-glass-card">
@@ -60,6 +87,17 @@ export default function Login() {
               required
             />
           </div>
+
+          <div className="forgot-password-container">
+            <button 
+              type="button" 
+              onClick={handleForgotPassword} 
+              className="forgot-password-link"
+            >
+              Forgot Password?
+            </button>
+          </div>
+
           <button type="submit" className="btn-auth-primary">Sign In</button>
         </form>
 

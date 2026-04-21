@@ -21,7 +21,7 @@ export default function Sidebar() {
 
   if (user?.accountType === "superadmin") {
     menus.splice(1, 0, {
-      name: "Admin Account Management",
+      name: "Admin Accounts",
       path: "/adminaccount",
       icon: <FaUsersGear />,
     });

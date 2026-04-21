@@ -87,6 +87,28 @@
 .auth-footer-text { text-align: center; margin-top: 25px; color: #777; font-size: 0.9rem; }
 .auth-footer-text a { color: var(--primary); font-weight: 800; text-decoration: none; }
 
+.forgot-password-container {
+    text-align: left;
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+
+.forgot-password-link {
+    background: none;
+    border: none;
+    color: #8d6e63; /* Cinnamon brown */
+    font-size: 0.85rem;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.forgot-password-link:hover {
+    color: #5d4037;
+    text-decoration: underline;
+}
+
 @media (max-width: 600px) {
   .auth-grid { grid-template-columns: 1fr; }
   .auth-glass-card { padding: 30px; }

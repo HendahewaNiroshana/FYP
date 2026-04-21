@@ -12,6 +12,7 @@ import 'screens/MyProductsScreen.dart';
 import 'screens/MyAd.dart';
 import 'screens/ViewOrdersScreen.dart';
 import 'screens/add_advertisement_screen.dart';
+import 'screens/prediction_service.dart';
 
 void main() {
   runApp(const CinnamonApp());
@@ -30,7 +31,7 @@ class CinnamonApp extends StatelessWidget {
         useMaterial3: true,
         fontFamily: 'Inter',
         brightness: Brightness.light,
-        scaffoldBackgroundColor: const Color(0xFFF8FAFC),
+        scaffoldBackgroundColor: const Color(0xFFF1F5F9), 
       ),
       initialRoute: '/',
       routes: {
@@ -47,6 +48,7 @@ class CinnamonApp extends StatelessWidget {
         '/prediction': (context) => const PredictionScreen(),
         '/product-prediction': (context) => const ProductSelectionScreen(),
         '/addproduct': (context) => const AddScreen(),
+        '/cinnamon-grades': (context) => const PredictiongradeScreen(),
       },
     );
   }
@@ -73,65 +75,88 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
+      extendBody: true, 
       appBar: AppBar(
-        title: const Text(
-          "Cinnamon Bridge",
-          style: TextStyle(
-            fontWeight: FontWeight.w800,
-            fontSize: 22,
-            letterSpacing: -0.5,
-          ),
+        title: Column(
+          children: [
+            const Text(
+              "Cinnamon Bridge",
+              style: TextStyle(
+                fontWeight: FontWeight.w900,
+                fontSize: 28,
+                letterSpacing: -0.8,
+                color: Colors.white,
+              ),
+            ),
+            Container(
+              height: 3,
+              width: 25,
+              margin: const EdgeInsets.only(top: 4),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.4),
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          ],
         ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         surfaceTintColor: Colors.transparent,
         elevation: 0,
+        actions: [
+          IconButton(
+            onPressed: () => Navigator.pushNamed(context, '/notification'),
+            icon: const Icon(Icons.notifications_none_rounded, color: Colors.white),
+          ),
+        ],
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              colors: [Color(0xFFD1AF17), Color(0xFFE5C124)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
+              colors: [Color(0xFFD1AF17), Color(0xFFB89812)],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
             ),
             borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(20),
-              bottomRight: Radius.circular(20),
+              bottomLeft: Radius.circular(30),
+              bottomRight: Radius.circular(30),
             ),
           ),
         ),
-        foregroundColor: Colors.white,
       ),
       body: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 400),
-        switchInCurve: Curves.easeOutQuart,
-        switchOutCurve: Curves.easeInQuart,
+        duration: const Duration(milliseconds: 500),
+        switchInCurve: Curves.easeInOutCubic,
+        switchOutCurve: Curves.easeInOutCubic,
         child: _pages[_selectedIndex],
       ),
 
       bottomNavigationBar: Container(
-        margin: const EdgeInsets.fromLTRB(20, 0, 20, 25),
-        height: 55,
+        margin: const EdgeInsets.fromLTRB(24, 0, 24, 30),
+        height: 70,
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.95),
-          borderRadius: BorderRadius.circular(30),
+          color: Colors.white.withOpacity(0.9),
+          borderRadius: BorderRadius.circular(35),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 25,
-              offset: const Offset(0, 10),
+              color: Colors.black.withOpacity(0.08),
+              blurRadius: 30,
+              offset: const Offset(0, 15),
             ),
           ],
+          border: Border.all(color: Colors.white.withOpacity(0.5), width: 1.5),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            _buildNavItem(Icons.home_rounded, 0),
-            _buildNavItem(Icons.handyman_rounded, 1),
-            _buildAddButton(2),
-            _buildNavItem(Icons.notifications_rounded, 3),
-            _buildNavItem(Icons.settings_rounded, 4),
-          ],
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(35),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _buildNavItem(Icons.grid_view_rounded, 0),
+              _buildNavItem(Icons.auto_graph_rounded, 1),
+              _buildAddButton(2),
+              _buildNavItem(Icons.message_rounded, 3),
+              _buildNavItem(Icons.person_outline_rounded, 4),
+            ],
+          ),
         ),
       ),
     );
@@ -142,20 +167,35 @@ class _MainScreenState extends State<MainScreen> {
     return GestureDetector(
       onTap: () => setState(() => _selectedIndex = index),
       behavior: HitTestBehavior.opaque,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 300),
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          color: isSelected
-              ? const Color(0xFFD1AF17).withOpacity(0.15)
-              : Colors.transparent,
-          shape: BoxShape.circle,
-        ),
-        child: Icon(
-          icon,
-          color: isSelected ? const Color(0xFFD1AF17) : Colors.grey.shade400,
-          size: 28,
-        ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 400),
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: isSelected
+                  ? const Color(0xFFD1AF17).withOpacity(0.12)
+                  : Colors.transparent,
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: Icon(
+              icon,
+              color: isSelected ? const Color(0xFFD1AF17) : Color(0xFF94A3B8),
+              size: 26,
+            ),
+          ),
+          if (isSelected)
+            Container(
+              margin: const EdgeInsets.only(top: 4),
+              height: 4,
+              width: 4,
+              decoration: const BoxDecoration(
+                color: Color(0xFFD1AF17),
+                shape: BoxShape.circle,
+              ),
+            ),
+        ],
       ),
     );
   }
@@ -165,9 +205,9 @@ class _MainScreenState extends State<MainScreen> {
     return GestureDetector(
       onTap: () => setState(() => _selectedIndex = index),
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 300),
-        height: 55,
-        width: 55,
+        duration: const Duration(milliseconds: 400),
+        height: 52,
+        width: 52,
         decoration: BoxDecoration(
           gradient: const LinearGradient(
             colors: [Color(0xFFD1AF17), Color(0xFFB89812)],
@@ -177,17 +217,17 @@ class _MainScreenState extends State<MainScreen> {
           shape: BoxShape.circle,
           boxShadow: [
             BoxShadow(
-              color: const Color(0xFFD1AF17).withOpacity(0.4),
-              blurRadius: 12,
-              offset: const Offset(0, 6),
+              color: const Color(0xFFD1AF17).withOpacity(0.35),
+              blurRadius: 15,
+              offset: const Offset(0, 8),
             ),
           ],
-          border: Border.all(color: Colors.white, width: 3),
+          border: Border.all(color: Colors.white, width: 2.5),
         ),
-        child: Icon(
-          _selectedIndex == 2 ? Icons.add_rounded : Icons.add_rounded,
+        child: const Icon(
+          Icons.add_rounded,
           color: Colors.white,
-          size: 32,
+          size: 30,
         ),
       ),
     );

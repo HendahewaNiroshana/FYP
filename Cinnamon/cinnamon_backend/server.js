@@ -22,6 +22,7 @@ const reportRoute = require("./routes/reportRoutes");
 const adminDashboard = require("./routes/adminDashboardRoute");
 const addreportsRoute = require("./routes/reportAdRoute");
 const salereportRoute = require("./routes/salereportRoutes");
+const cinnamonGradePredictionRoute = require("./routes/cinnamonGradePredictionRoute");
 
 
 //mobile
@@ -37,6 +38,7 @@ const PORT = process.env.PORT || 5000;
 //mern
 app.use(cors());
 app.use(express.json());
+
 app.use("/api/auth", authRoutes);
 app.use("/api/ads", adRoutes);
 app.use("/api/chat", chatRoutes);
@@ -54,6 +56,7 @@ app.use("/api/reports", reportRoute);
 app.use("/api/admindashboard", adminDashboard);
 app.use("/api/adsreport", addreportsRoute);
 app.use("/api/sale-reports", salereportRoute);
+app.use("/api/cinnamon-grade", cinnamonGradePredictionRoute);
 
 
 //mobile

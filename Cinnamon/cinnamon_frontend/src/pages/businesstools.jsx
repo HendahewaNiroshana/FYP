@@ -7,7 +7,8 @@ import { motion } from "framer-motion";
 import { 
     FaChartLine, FaBoxOpen, FaClipboardList, 
     FaAdversal, FaRobot, FaArrowRight, 
-    FaFileInvoiceDollar
+    FaFileInvoiceDollar,
+    FaSearch
 } from "react-icons/fa";
 import {
     Chart as ChartJS,
@@ -96,6 +97,7 @@ export default function BusinessTools() {
         { title: "Ad Manager", desc: "Boost sales with targeted promotions", icon: <FaAdversal />, path: "/add-advertisement", color: "#e74a3b" },
         { title: "AI Assistant", desc: "Smart business insights & help", icon: <FaRobot />, path: "/chatbot", color: "#6f42c1" },
         { title: "Sales Report", desc: "All of sales reports ", icon: <FaFileInvoiceDollar />, path: "/salereport", color: "#4292c1" },
+        { title: "Cinnamon Grades Classifier", desc: "Upload Image & Clasify Your Cinnamon Grade ", icon: <FaSearch />, path: "/cinnamonclassifier", color: "#C142A1" },
     ];
 
     return (

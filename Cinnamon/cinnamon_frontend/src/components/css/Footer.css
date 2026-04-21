@@ -1,8 +1,6 @@
-.footer {
-  background: #1a1a1a; /* Darker more professional footer */
-  color: #fff;
-  padding: 80px 8% 30px;
-  border-top: 5px solid var(--primary);
+.footer { /* Darker more professional footer */
+  color: #241d1d;
+  padding: 30px 0% 0px;
   position: relative;
   z-index: 10;
 }
@@ -17,19 +15,23 @@
   font-size: 1.8rem;
   color: var(--primary-light);
   margin-bottom: 20px;
+  font-size: 72px;
 }
 
 .footer-links h3, .footer-contact h3 {
-  color: #fff;
-  font-size: 1.1rem;
+  color: #5c3b10;
+  font-size: 32px;
   margin-bottom: 20px;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
 .footer-links a {
-  color: #bbb;
+  color: #3a2904;
   transition: 0.3s;
+  font-size: 22px;
+  margin-bottom: 15px;
+  text-decoration: none;
 }
 
 .footer-links a:hover {
@@ -41,11 +43,12 @@
   background: rgba(255,255,255,0.05);
   width: 40px;
   height: 40px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
   transition: 0.3s;
+  margin: 20px;
 }
 
 .social-icons a:hover {
@@ -55,7 +58,7 @@
 
 .footer-bottom {
   margin-top: 50px;
-  border-top: 1px solid rgba(255,255,255,0.1);
+  border-top: 1px solid rgb(100, 40, 40);
   padding-top: 30px;
   text-align: center;
   color: #666;
