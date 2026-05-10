@@ -46,7 +46,7 @@ async def predict(file: UploadFile = File(...)):
         confidence_val = float(probs[result_index])
 
         
-        if confidence_val < 0.50:
+        if confidence_val < 0.3:
             predicted_grade = "It's look Like a Not Cinnamon. Low Confidence."
         elif result_index < len(grades):
             predicted_grade = grades[result_index]

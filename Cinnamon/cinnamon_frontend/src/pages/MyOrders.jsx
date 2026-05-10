@@ -70,9 +70,6 @@ export default function MyOrders() {
                   <small>Payment: <b>{order.paymentType}</b></small>
                   <small>Date: {new Date(order.createdAt).toLocaleDateString()}</small>
                 </div>
-                {order.status === "Delivered" && (
-                   <button className="review-btn">Write a Review</button>
-                )}
               </div>
             </div>
           ))}

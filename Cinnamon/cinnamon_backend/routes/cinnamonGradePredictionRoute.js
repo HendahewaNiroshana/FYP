@@ -13,7 +13,7 @@ router.post('/classify-cinnamon', upload.single('image'), async (req, res) => {
             message: 'Image Not Found. (Make sure field name is "image")' 
         });
     }
-s
+
     try {
         const filePath = req.file.path;
         const fileStream = fs.createReadStream(filePath);

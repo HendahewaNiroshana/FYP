@@ -13,8 +13,10 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List products = [];
+  List filteredProducts = []; // Filter කළ දත්ත තබා ගැනීමට
   List ads = [];
   bool isLoading = true;
+  TextEditingController searchController = TextEditingController(); // Search bar එක සඳහා
 
   @override
   void initState() {
@@ -34,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
       if (productRes.statusCode == 200 && adRes.statusCode == 200) {
         setState(() {
           products = json.decode(productRes.body);
+          filteredProducts = products; // මුලින්ම සියලුම products පෙන්වන්න
           ads = json.decode(adRes.body);
           isLoading = false;
         });
@@ -41,6 +44,15 @@ class _HomeScreenState extends State<HomeScreen> {
     } catch (e) {
       print("Error: $e");
     }
+  }
+
+  // Search කිරීමේ logic එක
+  void filterSearch(String query) {
+    setState(() {
+      filteredProducts = products
+          .where((p) => p["name"].toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    });
   }
 
   @override
@@ -53,82 +65,103 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // --- Search Bar එක මෙතැනින් පටන් ගනී ---
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: TextField(
+              controller: searchController,
+              onChanged: (value) => filterSearch(value),
+              decoration: InputDecoration(
+                hintText: "Search products...",
+                prefixIcon: const Icon(Icons.search, color: Colors.grey),
+                filled: true,
+                fillColor: Colors.grey[200],
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide.none,
+                ),
+              ),
+            ),
+          ),
+          // --- Search Bar එක අවසන් ---
+
           const Padding(
             padding: EdgeInsets.all(12),
             child: Text(
               "Products",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
             ),
           ),
 
           SizedBox(
             height: 270,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: products.length,
-              itemBuilder: (context, index) {
-                final p = products[index];
-                return Card(
-                  margin: const EdgeInsets.all(10),
-                  child: Container(
-                    width: 180,
-                    padding: const EdgeInsets.all(8),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: p["image"] != null && p["image"].isNotEmpty
-                              ? Image.network(
-                                  p["image"].replaceFirst(
-                                    "localhost",
-                                    "127.0.0.1",
-                                  ),
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (c, o, s) =>
-                                      const Icon(Icons.broken_image, size: 50),
-                                )
-                              : const Icon(Icons.broken_image, size: 50),
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          p["name"],
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text("Rs. ${p["price"]}"),
-                        const SizedBox(height: 5),
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) =>
-                                    ProductDetailsScreen(product: p),
-                              ),
-                            );
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color.fromARGB(
-                              255,
-                              209,
-                              175,
-                              23,
+            child: filteredProducts.isEmpty 
+              ? const Center(child: Text("No products found"))
+              : ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: filteredProducts.length, // filteredProducts භාවිතා කරන්න
+                  itemBuilder: (context, index) {
+                    final p = filteredProducts[index];
+                    return Card(
+                      margin: const EdgeInsets.all(10),
+                      child: Container(
+                        width: 180,
+                        padding: const EdgeInsets.all(8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: p["image"] != null && p["image"].isNotEmpty
+                                  ? Image.network(
+                                      p["image"].replaceFirst(
+                                        "localhost",
+                                        "127.0.0.1",
+                                      ),
+                                      fit: BoxFit.cover,
+                                      errorBuilder: (c, o, s) =>
+                                          const Icon(Icons.broken_image, size: 50),
+                                    )
+                                  : const Icon(Icons.broken_image, size: 50),
                             ),
-                            foregroundColor: Color.fromARGB(255, 107, 107, 107),
-                          ),
-                          child: const Text("Buy"),
+                            const SizedBox(height: 5),
+                            Text(
+                              p["name"],
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text("Rs. ${p["price"]}"),
+                            const SizedBox(height: 5),
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) =>
+                                        ProductDetailsScreen(product: p),
+                                  ),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color.fromARGB(
+                                  255,
+                                  209,
+                                  175,
+                                  23,
+                                ),
+                                foregroundColor: const Color.fromARGB(255, 107, 107, 107),
+                              ),
+                              child: const Text("Buy"),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            ),
+                      ),
+                    );
+                  },
+                ),
           ),
 
           const Padding(
@@ -180,7 +213,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             175,
                             23,
                           ),
-                          foregroundColor: Color.fromARGB(255, 107, 107, 107),
+                          foregroundColor: const Color.fromARGB(255, 107, 107, 107),
                         ),
                         child: const Text("View"),
                       ),

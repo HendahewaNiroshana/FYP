@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./css/SellerOrders.css";
+import './css/ProductPopup.css';
 
 export default function SellerOrders() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  // Modal සහ Product Details සඳහා State
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   const userData = localStorage.getItem("user"); 
   const user = userData ? JSON.parse(userData) : null;
@@ -30,6 +35,17 @@ export default function SellerOrders() {
     fetchOrders();
   }, [sellerId]);
 
+  // Product Details ලබාගන්නා Function එක
+  const fetchProductDetails = async (productId) => {
+    try {
+        const response = await axios.get(`http://localhost:5000/api/products/product/${productId}`);
+        setSelectedProduct(response.data);
+        setShowModal(true);
+    } catch (error) {
+        console.error("Error fetching product details", error);
+    }
+  };
+
   const updateStatus = async (orderId, newStatus) => {
     if (!newStatus) return;
     try {
@@ -38,6 +54,7 @@ export default function SellerOrders() {
       });
       if (res.data.success) {
         fetchOrders(); 
+        window.location.reload();
       }
     } catch (err) {
       console.error("Update error:", err);
@@ -79,6 +96,7 @@ export default function SellerOrders() {
             <thead>
               <tr>
                 <th>Customer Details</th>
+                <th>Item Code</th>
                 <th>Total Revenue</th>
                 <th>Current Status</th>
                 <th>Manage Action</th>
@@ -95,6 +113,14 @@ export default function SellerOrders() {
                     </div>
                   </td>
                   
+                  <td 
+                    className="item-code-cell" 
+                    style={{ cursor: 'pointer', color: '#D1AF17', fontWeight: 'bold' }}
+                    onClick={() => fetchProductDetails(order.productId?._id)}
+                  >
+                    {order.productId?._id || "N/A"}
+                  </td>
+
                   <td className="revenue-cell">
                     LKR {order.totalPrice?.toLocaleString()}
                   </td>
@@ -119,6 +145,25 @@ export default function SellerOrders() {
               ))}
             </tbody>
           </table>
+
+          {/* Modal Popup */}
+          {showModal && selectedProduct && (
+            <div className="modal-overlay">
+              <div className="product-modal">
+                <button className="close-btn" onClick={() => setShowModal(false)}>&times;</button>
+                <h2>{selectedProduct.name}</h2>
+                {selectedProduct.image && (
+                  <img src={selectedProduct.image} alt={selectedProduct.name} />
+                )}
+                <p>{selectedProduct.description}</p>
+                <div className="modal-footer-info">
+                  <p className="price">Price: LKR {selectedProduct.price}</p>
+                  <p>Stock Available: {selectedProduct.stock}</p>
+                  <p><small>Seller: {selectedProduct.seller?.name || "Unknown"}</small></p>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>
