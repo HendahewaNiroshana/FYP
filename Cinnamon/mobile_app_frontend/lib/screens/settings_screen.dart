@@ -26,7 +26,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     setState(() {
       name = prefs.getString("name");
       email = prefs.getString("email");
-      profilePic = prefs.getString("userProfilePic"); // 🖼️ profile pic URL
+      profilePic = prefs.getString("userProfilePic"); 
       isLoggedIn = prefs.getBool("isLoggedIn") ?? false;
     });
   }

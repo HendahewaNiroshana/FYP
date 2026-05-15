@@ -31,7 +31,6 @@ class _ProductPredictionScreenState extends State<ProductPredictionScreen> {
 
   Future<void> _fetchProductData() async {
     try {
-      // ඔබ කලින් හැදූ Backend Route එක භාවිතා කිරීම
       final response = await http.get(
         Uri.parse(
           "http://localhost:5000/api/prediction/product/${widget.productId}",
@@ -41,7 +40,6 @@ class _ProductPredictionScreenState extends State<ProductPredictionScreen> {
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         if (data['success']) {
-          // විකුණුම් ඉතිහාසය ප්‍රස්ථාරයට සකස් කිරීම
           List<dynamic> orders = data['orders'];
           Map<String, int> monthlyData = {};
 

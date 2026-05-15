@@ -26,7 +26,6 @@ class _ProductSelectionScreenState extends State<ProductSelectionScreen> {
     String? userId = prefs.getString("userId");
 
     try {
-      // ඔබේ Backend එකේ Seller ගේ products ගන්නා API එක
       final res = await http.get(
         Uri.parse("http://localhost:5000/api/products/seller/$userId"),
       );

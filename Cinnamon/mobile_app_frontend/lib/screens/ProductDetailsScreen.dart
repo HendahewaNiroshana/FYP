@@ -15,13 +15,11 @@ class ProductDetailsScreen extends StatelessWidget {
   void _handleBuy(BuildContext context) async {
     bool loggedIn = await _checkLogin();
     if (loggedIn) {
-      // Logged in → Go to Place Order
       Navigator.push(
         context,
         MaterialPageRoute(builder: (_) => PlaceOrderScreen(product: product)),
       );
     } else {
-      // Not logged in → Redirect to Login
       Navigator.pushNamed(context, "/login");
     }
   }

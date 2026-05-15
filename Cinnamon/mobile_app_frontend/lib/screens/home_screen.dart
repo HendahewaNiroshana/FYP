@@ -13,10 +13,10 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List products = [];
-  List filteredProducts = []; // Filter කළ දත්ත තබා ගැනීමට
+  List filteredProducts = []; 
   List ads = [];
   bool isLoading = true;
-  TextEditingController searchController = TextEditingController(); // Search bar එක සඳහා
+  TextEditingController searchController = TextEditingController(); 
 
   @override
   void initState() {
@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
       if (productRes.statusCode == 200 && adRes.statusCode == 200) {
         setState(() {
           products = json.decode(productRes.body);
-          filteredProducts = products; // මුලින්ම සියලුම products පෙන්වන්න
+          filteredProducts = products; 
           ads = json.decode(adRes.body);
           isLoading = false;
         });
@@ -46,7 +46,6 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  // Search කිරීමේ logic එක
   void filterSearch(String query) {
     setState(() {
       filteredProducts = products
@@ -65,7 +64,6 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // --- Search Bar එක මෙතැනින් පටන් ගනී ---
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: TextField(
@@ -83,7 +81,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          // --- Search Bar එක අවසන් ---
 
           const Padding(
             padding: EdgeInsets.all(12),
@@ -99,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ? const Center(child: Text("No products found"))
               : ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: filteredProducts.length, // filteredProducts භාවිතා කරන්න
+                  itemCount: filteredProducts.length, 
                   itemBuilder: (context, index) {
                     final p = filteredProducts[index];
                     return Card(

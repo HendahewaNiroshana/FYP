@@ -23,7 +23,7 @@ class _ViewOrdersScreenState extends State<ViewOrdersScreen> {
 
   Future<void> _loadSellerOrders() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    final sellerId = prefs.getString("userId"); // logged-in seller’s ID
+    final sellerId = prefs.getString("userId"); 
 
     if (sellerId == null) {
       ScaffoldMessenger.of(

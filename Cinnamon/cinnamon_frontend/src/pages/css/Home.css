@@ -2,6 +2,7 @@
 .snap-container {
   height: 100vh;
   overflow-y: scroll;
+  overflow-x: scroll;
   scroll-snap-type: y mandatory; /* Section එකෙන් section එකට snap වීම */
   scroll-behavior: smooth;
   background-color: #ffffff;
@@ -90,6 +91,12 @@
   object-fit: cover;
 }
 
+.hero-description{
+  font-size: 1.2rem;
+  color: var(--text-sub);
+  margin-bottom: 30px;
+}
+
 /* Horizontal Scroll Section */
 .horizontal-trigger {
   height: 200vh; /* Scroll length */
@@ -109,8 +116,17 @@
   display: flex;
   gap: 30px;
   padding: 0 50px;
+  scrollbar-width: auto;
 }
 
+.viewproduct{
+  border: none;
+  padding: 5px 10px;
+  color: #eee;
+  background-color: #c9932f;
+  border-radius: 5px;
+  font-size: 20px;
+}
 .product-card-light {
   min-width: 350px;
   background: white;
@@ -127,6 +143,56 @@
   border-radius: 10px;
 }
 
+.product-card-light img:hover {
+  transform: scale(1.08);
+  transition: 0.3s;
+}
+
+.product-card-light:hover {
+  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+  transition: 0.3s;
+  transform: scale(1.04);
+}
+
+
+.home-product-name{
+  font-size: 1.7rem;
+}
+.view-all-card {
+  min-width: 200px; /* Card eke size ekata samana wenna */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.view-all-btn {
+  padding: 12px 24px;
+  background-color: #8a6d3b;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+  min-height: 80px;
+}
+
+.view-all-btn:hover {
+  background-color: #5a4529;
+}
+.product-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Lines ganana methana wenas karanna puluwan */
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+  margin: 10px 0px;
+}
+.home-product-price{
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #c21717;
+  margin: 5px 0px;
+}
 /* Mission & Vision Content */
 .content-box {
   display: grid;
@@ -172,6 +238,19 @@
 
 .mission-bg { background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5-4j79XrlyNfswjguBoHbBykTfh9QC_BLXw&s') center/cover; }
 .vision-bg { background: url('https://images.unsplash.com/photo-1506485338023-6ce5f36692df?q=80&w=2070&auto=format&fit=crop') center/cover; }
+
+.home-vision{
+  font-size: 1.3rem;
+  color: var(--text-sub);
+  text-align: justify;
+}
+
+.home-vision{
+  font-size: 1.3rem;
+  color: var(--text-sub);
+  text-align: justify;
+
+}
 
 /* Responsive */
 @media (max-width: 1024px) {

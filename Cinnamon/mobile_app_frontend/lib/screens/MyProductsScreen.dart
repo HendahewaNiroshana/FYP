@@ -15,9 +15,7 @@ class _MyProductsScreenState extends State<MyProductsScreen> {
   List products = [];
   bool isLoading = true;
 
-  // ⚙️ Replace with your computer’s local IP address
-  final String baseUrl = "http://localhost:5000"; // ← change this to your PC IP
-
+  final String baseUrl = "http://localhost:5000"; 
   @override
   void initState() {
     super.initState();
@@ -85,7 +83,6 @@ class _MyProductsScreenState extends State<MyProductsScreen> {
     }
   }
 
-  // Delete කිරීමට පෙර තහවුරු කරගැනීමට පෙන්වන Dialog එක
   void _confirmDelete(String id) {
     showDialog(
       context: context,

@@ -14,7 +14,7 @@ export default function EditProfile() {
   const [preview, setPreview] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // 1. දත්ත ලබා ගැනීම (Key එක 'adminUser' ලෙස ස්ථාවර කරන ලදී)
+ 
   useEffect(() => {
     const rawData = localStorage.getItem("user");
     if (rawData) {
@@ -47,7 +47,6 @@ export default function EditProfile() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // 2. ආරක්ෂිත පරීක්ෂාව (Data null ද කියා බැලීම)
     const rawData = localStorage.getItem("adminUser");
     if (!rawData) {
       alert("Session expired. Please login again.");
@@ -80,10 +79,9 @@ export default function EditProfile() {
       if (res.data.success) {
         alert("✅ Profile Updated Successfully!");
         
-        // පරණ Token එකත් සමඟ අලුත් දත්ත සේව් කිරීම
         const updatedAdmin = { 
           ...res.data.user, 
-          id: res.data.user._id, // id field එක ස්ථාවර කිරීම
+          id: res.data.user._id, 
           token: adminData.token 
         };
         localStorage.setItem("adminUser", JSON.stringify(updatedAdmin));
@@ -119,7 +117,6 @@ export default function EditProfile() {
                 <input type="file" onChange={handleFileChange} accept="image/*" />
               </label>
             </div>
-            {/* LocalStorage පරීක්ෂා කර පෙන්වීම */}
             <p className="account-type-badge">
               {localStorage.getItem("adminUser") ? JSON.parse(localStorage.getItem("adminUser")).accountType : "Admin"}
             </p>

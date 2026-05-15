@@ -1,34 +1,34 @@
 import React from "react";
 import "./css/Services.css";
-import { FaShippingFast, FaLeaf, FaHandsHelping, FaStar } from "react-icons/fa";
+import { FaShippingFast, FaStore, FaRobot, FaChartLine } from "react-icons/fa";
 
 export default function Services() {
   const services = [
-    {
-      id: 1,
-      title: "Express Logistics",
-      desc: "Experience ultra-fast and secure shipping, ensuring your premium spices reach you in peak condition.",
-      icon: <FaShippingFast />,
-    },
-    {
-      id: 2,
-      title: "Purely Organic",
-      desc: "Sourced directly from certified gardens. No chemicals, just the authentic essence of nature.",
-      icon: <FaLeaf />,
-    },
-    {
-      id: 3,
-      title: "Dedicated Support",
-      desc: "Our specialists are available 24/7 to provide expert guidance on our spice collections.",
-      icon: <FaHandsHelping />,
-    },
-    {
-      id: 4,
-      title: "Elite Quality",
-      desc: "Every product undergoes rigorous quality checks to meet global export standards.",
-      icon: <FaStar />,
-    },
-  ];
+  {
+    id: 1,
+    title: "Smart Marketplace Access",
+    desc: "Seamlessly connect buyers and sellers through an intelligent digital marketplace designed for efficient cinnamon trading, secure transactions, and direct business opportunities.",
+    icon: <FaStore />,
+  },
+  {
+    id: 2,
+    title: "AI-Powered Customer Assistance",
+    desc: "Get instant support through an intelligent AI assistant capable of answering cinnamon-related questions, platform guidance, and customer inquiries 24/7.",
+    icon: <FaRobot />,
+  },
+  {
+    id: 3,
+    title: "Advanced Order Tracking",
+    desc: "Track every stage of your order in real time with automated notifications and email updates, ensuring transparency and improved delivery visibility.",
+    icon: <FaShippingFast />,
+  },
+  {
+    id: 4,
+    title: "Business Analytics & Sales Insights",
+    desc: "Empower business growth with AI-driven sales forecasting, product performance analytics, revenue predictions, and market trend insights.",
+    icon: <FaChartLine />,
+  },
+]
 
   return (
     <div className="services-section">

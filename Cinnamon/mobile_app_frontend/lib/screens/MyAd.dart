@@ -15,8 +15,7 @@ class _MyAdsScreenState extends State<MyAdsScreen> {
   List ads = [];
   bool isLoading = true;
 
-  final String baseUrl = "http://localhost:5000"; // ඔබේ Backend URL එක
-
+  final String baseUrl = "http://localhost:5000"; 
   @override
   void initState() {
     super.initState();
@@ -58,7 +57,6 @@ class _MyAdsScreenState extends State<MyAdsScreen> {
   }
 
   Future<void> _deleteAd(String id) async {
-    // Delete කිරීමට පෙර තහවුරු කරගැනීමේ Dialog එකක්
     bool confirm = await showDialog(
       context: context,
       builder: (context) => AlertDialog(

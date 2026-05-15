@@ -91,14 +91,14 @@ router.post("/add", async (req, res) => {
     if (!targetUser) {
       return res.status(404).json({ 
         success: false, 
-        message: "මෙම නමින් පරිශීලකයෙකු සොයාගත නොහැක." 
+        message: "User Not Found." 
       });
     }
 
     if (!fromUser) {
       return res.status(404).json({ 
         success: false, 
-        message: "ඔබේ ගිණුම තහවුරු කරගත නොහැක." 
+        message: "Reporting user not found." 
       });
     }
 

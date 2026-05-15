@@ -7,7 +7,6 @@ export default function SellerOrders() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Modal සහ Product Details සඳහා State
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
@@ -35,7 +34,7 @@ export default function SellerOrders() {
     fetchOrders();
   }, [sellerId]);
 
-  // Product Details ලබාගන්නා Function එක
+ 
   const fetchProductDetails = async (productId) => {
     try {
         const response = await axios.get(`http://localhost:5000/api/products/product/${productId}`);

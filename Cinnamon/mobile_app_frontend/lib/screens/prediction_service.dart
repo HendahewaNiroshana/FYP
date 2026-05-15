@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/foundation.dart'; // kIsWeb sadaha meka avashyayi
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
@@ -13,12 +14,13 @@ class PredictiongradeScreen extends StatefulWidget {
 
 class _PredictiongradeScreenState extends State<PredictiongradeScreen> {
   File? _image;
+  Uint8List? _webImage; 
   bool _isLoading = false;
   String? _predictedGrade;
   String? _confidence;
   final _picker = ImagePicker();
 
-  final String _nodeApiUrl = "http://localhost:5000/api/classify-cinnamon";
+  final String _nodeApiUrl = "http://localhost:5000/api/cinnamon-grade/classify-cinnamon";
 
   Future<void> _pickImage(ImageSource source) async {
     try {
@@ -28,11 +30,22 @@ class _PredictiongradeScreenState extends State<PredictiongradeScreen> {
       );
       
       if (pickedFile != null) {
-        setState(() {
-          _image = File(pickedFile.path);
-          _predictedGrade = null;
-          _confidence = null;
-        });
+        if (kIsWeb) {
+          final bytes = await pickedFile.readAsBytes();
+          setState(() {
+            _webImage = bytes;
+            _image = File(pickedFile.path); 
+            _predictedGrade = null;
+            _confidence = null;
+          });
+        } else {
+          // Mobile sadaha
+          setState(() {
+            _image = File(pickedFile.path);
+            _predictedGrade = null;
+            _confidence = null;
+          });
+        }
       }
     } catch (e) {
       _showSnackBar("Error picking image: $e");
@@ -40,14 +53,22 @@ class _PredictiongradeScreenState extends State<PredictiongradeScreen> {
   }
 
   Future<void> _analyzeWithNodeBridge() async {
-    if (_image == null) return;
+    if (_image == null && _webImage == null) return;
 
     setState(() => _isLoading = true);
 
     try {
       var request = http.MultipartRequest('POST', Uri.parse(_nodeApiUrl));
       
-      request.files.add(await http.MultipartFile.fromPath('image', _image!.path));
+      if (kIsWeb) {
+        request.files.add(http.MultipartFile.fromBytes(
+          'image',
+          _webImage!,
+          filename: 'upload.jpg',
+        ));
+      } else {
+        request.files.add(await http.MultipartFile.fromPath('image', _image!.path));
+      }
 
       var streamedResponse = await request.send();
       var response = await http.Response.fromStream(streamedResponse);
@@ -64,7 +85,7 @@ class _PredictiongradeScreenState extends State<PredictiongradeScreen> {
         _showSnackBar(errorData['message'] ?? "Server Error: ${response.statusCode}");
       }
     } catch (e) {
-      _showSnackBar("Cannot Connect to Node.js Server. Check Port 5000.");
+      _showSnackBar("Cannot Connect to Node.js Server. Check Port 5000 and CORS.");
     } finally {
       if (mounted) setState(() => _isLoading = false);
     }
@@ -117,12 +138,12 @@ class _PredictiongradeScreenState extends State<PredictiongradeScreen> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      "Connecting via Localhost:5000",
+                      kIsWeb ? "Running on Web Mode" : "Running on Mobile Mode",
                       style: TextStyle(color: Colors.blueGrey.withOpacity(0.7), fontSize: 12),
                     ),
                     const SizedBox(height: 25),
 
-                    // Image Card
+                    // Image Card Fix
                     AspectRatio(
                       aspectRatio: 1,
                       child: Container(
@@ -134,10 +155,12 @@ class _PredictiongradeScreenState extends State<PredictiongradeScreen> {
                           ],
                           border: Border.all(color: const Color(0xFFD1AF17).withOpacity(0.3), width: 2),
                         ),
-                        child: _image != null
+                        child: (_image != null || _webImage != null)
                             ? ClipRRect(
                                 borderRadius: BorderRadius.circular(23),
-                                child: Image.file(_image!, fit: BoxFit.cover),
+                                child: kIsWeb 
+                                  ? Image.memory(_webImage!, fit: BoxFit.cover) 
+                                  : Image.file(_image!, fit: BoxFit.cover),
                               )
                             : Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -183,7 +206,7 @@ class _PredictiongradeScreenState extends State<PredictiongradeScreen> {
                       )
                     else if (_predictedGrade != null)
                       _buildResultCard()
-                    else if (_image != null)
+                    else if (_image != null || _webImage != null)
                       ElevatedButton(
                         onPressed: _analyzeWithNodeBridge,
                         style: ElevatedButton.styleFrom(
@@ -241,11 +264,7 @@ class _PredictiongradeScreenState extends State<PredictiongradeScreen> {
             textAlign: TextAlign.center,
             style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w900, color: Color(0xFF2C1810)),
           ),
-          const SizedBox(height: 8),
-          Text(
-            "Reliability: $_confidence",
-            style: TextStyle(fontSize: 15, color: Colors.grey.shade700, fontWeight: FontWeight.w500),
-          ),
+          
         ],
       ),
     );
